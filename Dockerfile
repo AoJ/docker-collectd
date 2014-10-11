@@ -1,7 +1,6 @@
 FROM aooj/base
 MAINTAINER AooJ <aooj@n13.cz>
 
-ENV ETCD http://b.aoj.io:4001
 
 ADD ./files/build /opt/build
 ADD ./files/start /opt/start
