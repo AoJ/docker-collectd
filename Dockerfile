@@ -1,14 +1,15 @@
 FROM aooj/base
 MAINTAINER AooJ <aooj@n13.cz>
 
+ENV CONFD_VERSION 0.6.3
 
-ADD ./files/build /opt/build
-ADD ./files/start /opt/start
-RUN /opt/build
+RUN apt-get update && apt-get upgrade -y && apt-get -y install gzip collectd collectd-utils && apt-get clean
 
-RUN rm -rf /etc/collectd
-ADD ./confd /etc/confd
-ADD ./collectd /etc/collectd
+RUN wget -q -O /usr/bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64
+RUN chmod +x /usr/bin/confd
 
-ENTRYPOINT ["/bin/start"]
-CMD []
+RUN rm -rf /etc/collectd && mkdir -p /etc/collectd/collect.d
+ADD files/etc /etc/collectd
+RUN mkdir -p /etc/confd/{templates,conf.d}
+
+ADD files/collectd-supervisor.conf /etc/supervisor/conf.d/collectd.conf

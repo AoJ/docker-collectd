@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-
-confd -onetime -verbose -node $ETCD -confdir /etc/confd
-
-collectd -f

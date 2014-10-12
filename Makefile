@@ -8,8 +8,8 @@
 #	make remove	- discarding current running production container
 
 NAME=aooj/collectd
-ID=collectd-host
-VERSION=1.0
+ID=collectd-sandbox
+VERSION=1.1
 
 
 build:
@@ -17,18 +17,18 @@ build:
 
 
 debug:
-	docker run  --entrypoint="/bin/bash" --rm -p 4567 -ti --link kickass_einstein:etcd $(NAME):$(VERSION) -c /bin/bash
+	docker run --entrypoint="/bin/bash" --rm -p 4567 -ti $(NAME):$(VERSION) -c /bin/bash
 
 remove:
 	docker kill $(ID) > /dev/null 2>&1
 	docker rm $(ID) > /dev/null 2>&1
 
 run:
-	docker run -d --name $(ID) $(NAME):$(VERSION)
+	docker run -d -h $(ID]--name $(ID) -p 4567:4567 $(NAME):$(VERSION)
 
 
 try: build debug
 
 
-.PHONY: build debug try run remove logs deploy
+.PHONY: build debug run remove try
 
