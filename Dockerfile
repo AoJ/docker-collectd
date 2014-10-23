@@ -13,3 +13,4 @@ ADD files/etc /etc/collectd
 RUN mkdir -p /etc/confd/{templates,conf.d}
 
 ADD files/collectd-supervisor.conf /etc/supervisor/conf.d/collectd.conf
+ADD files/start-collectd.sh /opt/start-collectd.sh
