@@ -3,7 +3,7 @@ MAINTAINER AooJ <aooj@n13.cz>
 
 ENV CONFD_VERSION 0.6.3
 
-RUN apt-get -y install gzip collectd collectd-utils && apt-get clean
+RUN apt-get update && apt-get install -y gzip collectd collectd-utils
 
 RUN wget -q -O /usr/bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64
 RUN chmod +x /usr/bin/confd
