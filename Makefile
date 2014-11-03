@@ -24,7 +24,7 @@ remove:
 	docker rm $(ID) > /dev/null 2>&1
 
 run:
-	docker run -d -h $(ID]--name $(ID) -p 4567:4567 $(NAME):$(VERSION)
+	docker run -d -h $(ID]--name $(ID) $(NAME):$(VERSION)
 
 
 try: build debug
